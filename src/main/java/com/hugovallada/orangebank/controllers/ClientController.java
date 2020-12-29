@@ -7,10 +7,7 @@ import com.hugovallada.orangebank.domain.clients.Client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityExistsException;
 
@@ -25,20 +22,13 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<?> getClientByName(@PathVariable String name){
-        //TODO: Create Repositorys
-        if(name.equals("Hugo")){
-            throw new EntityExistsException("There is an client with this name already");
+    @PostMapping
+    public ResponseEntity<Client> createClient(@RequestBody Client client){
+        if(client.getEmail().equals("emailJaExiste@example.com") || client.getCpf().equals("000000000-00")){
+            throw new EntityExistsException("Already exists an account with this data");
         }
 
-        var client = new Client();
-        client.setName(name);
-        client.setEmail("example@gmail.com");
-        client.setCpf("0000000000");
-        client.setBirthDate(LocalDate.parse("1999-02-09"));
-        
-        return ResponseEntity.status(200).body(client);
+        return ResponseEntity.status(201).body(client);
     }
     
 }
