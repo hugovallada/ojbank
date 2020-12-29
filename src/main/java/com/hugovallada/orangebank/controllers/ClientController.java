@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityExistsException;
+
 @RestController
 @RequestMapping("/api/v1/clients")
 public class ClientController {
@@ -27,7 +29,7 @@ public class ClientController {
     public ResponseEntity<?> getClientByName(@PathVariable String name){
         //TODO: Create Repositorys
         if(name.equals("Hugo")){
-            return ResponseEntity.status(404).body("The client already exists");
+            throw new EntityExistsException("There is an client with this name already");
         }
 
         var client = new Client();
