@@ -1,4 +1,4 @@
-package com.hugovallada.orangebank.application.services.exceptions;
+package com.hugovallada.orangebank.application.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

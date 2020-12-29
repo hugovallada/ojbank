@@ -1,4 +1,4 @@
-package com.hugovallada.orangebank.application.services.exceptions;
+package com.hugovallada.orangebank.application.exceptions;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
