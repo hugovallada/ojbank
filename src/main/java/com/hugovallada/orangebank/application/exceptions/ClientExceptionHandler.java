@@ -22,7 +22,7 @@ public class ClientExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> buildResponseEntity(HttpStatus status, String message , List<String> errors){
         var apiError = ApiError.builder()
                 .code(status.value())
-                .message(status.getReasonPhrase())
+                .status(status.getReasonPhrase())
                 .message(message)
                 .errors(errors)
                 .timestamp(LocalDateTime.now())
