@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 
@@ -22,7 +19,7 @@ public class ClientDTO {
 
     @NotEmpty(message = "The property 'name' can't be empty")
     @NotNull(message = "The property 'name' can't be null")
-    @Min(value = 3, message = "The propery 'name' should be at least 3 characters long")
+    @Size(min = 3, message = "The property 'name' should be at least 3 characters long")
     private String name;
 
     @NotNull(message = "The property 'email' can't be null")

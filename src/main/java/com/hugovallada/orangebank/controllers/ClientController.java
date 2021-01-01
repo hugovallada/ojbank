@@ -28,19 +28,9 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@RequestBody @Valid ClientDTO clientDTO) {
-        if(clientDTO.getEmail().equals("emailJaExiste@example.com") || clientDTO.getCpf().equals("000000000-00")){
-            throw new EntityExistsException("Already exists an account with this data");
-        }
-
-        ClientMapper mapper = ClientMapper.INSTANCE;
-        var client = mapper.toModel(clientDTO);
-
-        // TODO: Autommaper needs to do this automatic
-        // Usar o mapping
-        //client.setBirthDate(LocalDate.parse(String.valueOf(clientDTO.getBirthDate())));
-
-        return ResponseEntity.status(201).body(client);
+    public ResponseEntity<ClientDTO> createClient(@RequestBody @Valid ClientDTO clientDTO) {
+        var savedClientDTO = clientService.insertClient(clientDTO);
+        return ResponseEntity.status(201).body(savedClientDTO);
     }
     
 }
