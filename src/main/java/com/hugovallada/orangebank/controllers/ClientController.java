@@ -2,6 +2,7 @@ package com.hugovallada.orangebank.controllers;
 
 import java.time.LocalDate;
 
+
 import com.hugovallada.orangebank.application.services.ClientService;
 import com.hugovallada.orangebank.domain.clients.Client;
 
@@ -15,10 +16,11 @@ import javax.persistence.EntityExistsException;
 @RequestMapping("/api/v1/clients")
 public class ClientController {
 
-    private ClientService clientService;
+
+    private final ClientService clientService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService){
         this.clientService = clientService;
     }
 
