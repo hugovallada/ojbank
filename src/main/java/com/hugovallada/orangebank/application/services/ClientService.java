@@ -14,11 +14,11 @@ public class ClientService {
     private final ClientRepository repository;
 
     @Autowired
-    public ClientService(ClientRepository repository){
+    public ClientService(ClientRepository repository) {
         this.repository = repository;
     }
 
-    public ClientDTO insertClient(ClientDTO clientDTO){
+    public ClientDTO insertClient(ClientDTO clientDTO) {
         checkIfExists(clientDTO.getEmail(), clientDTO.getCpf());
         ClientMapper mapper = ClientMapper.INSTANCE;
 
@@ -28,10 +28,11 @@ public class ClientService {
         return mapper.toDTO(savedClient);
     }
 
-    private void checkIfExists(String email, String cpf){
+    private void checkIfExists(String email, String cpf) {
         var clients = repository.findAllByEmailOrCpf(email, cpf);
 
-        if (clients.size() >= 1) throw new EntityExistsException("There's already a user with the same data!Please check your info");
+        if (!clients.isEmpty())
+            throw new EntityExistsException("There's already a user with the same data!Please check your info");
     }
 
 }
