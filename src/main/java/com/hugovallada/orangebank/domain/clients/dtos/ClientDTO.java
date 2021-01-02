@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.Period;
 
 
 @Data
@@ -34,4 +35,11 @@ public class ClientDTO {
 
     @NotNull(message = "The property birthDate can't be null")
     private LocalDate birthDate;
+
+    private int age;
+
+    public void returnAge() {
+        var age = Period.between(birthDate, LocalDate.now());
+        this.age = age.getYears();
+    }
 }

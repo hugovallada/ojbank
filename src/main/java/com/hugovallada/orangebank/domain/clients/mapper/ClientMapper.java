@@ -7,12 +7,21 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface ClientMapper {
+public abstract class ClientMapper {
 
-    ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
+    public static ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
     @Mapping(source = "birthDate", target = "birthDate")
-    Client toModel(ClientDTO clientDTO);
+    abstract public Client toModel(ClientDTO clientDTO);
 
-    ClientDTO toDTO(Client client);
+    public ClientDTO toDTO(Client client) {
+        var clientDTO = new ClientDTO();
+        clientDTO.setName(client.getName());
+        clientDTO.setCpf(client.getCpf());
+        clientDTO.setBirthDate(client.getBirthDate());
+        clientDTO.setEmail(client.getEmail());
+        clientDTO.returnAge();
+
+        return clientDTO;
+    }
 }
