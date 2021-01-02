@@ -29,9 +29,9 @@ public class ClientService {
     }
 
     private void checkIfExists(String email, String cpf) {
-        var clients = repository.findAllByEmailOrCpf(email, cpf);
+        var client = repository.findFirstByEmailOrCpf(email, cpf);
 
-        if (!clients.isEmpty())
+        if (!client.isEmpty())
             throw new EntityExistsException("There's already a user with the same data!Please check your info");
     }
 
